@@ -1,5 +1,8 @@
+import sys
 from data_struct.tree import Tree
 from encontrar_freque import main
+from bigtree import print_tree,list_to_tree
+sys.setrecursionlimit(15000)
 
 tree = Tree('root')
 
@@ -12,22 +15,15 @@ for sample in samples:
             tree.navigate_to(word)
     tree.reset()
 
-tree.printTree(tree.root)
+soma_string="root/"
 
-
-
-'''path=[]
-soma_string="raiz/"
-
-x=['raiz/montagem/BHA/reduzido/apenas/01/seção/Comandos/8/''/''/+/01/'] - tirar essas aspas para mostrar arvore
-
-for position,text in enumerate(sentencas_com_palavra_mais_freq):
+path=[]
+for position,text in enumerate(samples):
     for i in text:
-        if (i != " '' "):
-            soma_string=soma_string+i+'/'
+            soma_string=soma_string+i+"/"
     path.append(soma_string)
-    soma_string="raiz/"
+    soma_string="root/"
         
 
-root = list_to_tree(x)
-print_tree(root)'''
+root = list_to_tree(path)
+print_tree(root,style="double")
