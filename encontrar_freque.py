@@ -74,7 +74,10 @@ def main():
     global palavras_ja_consultadas
     global palavra_maior_frequencia
     global sentencas_com_palavra_mais_freq
-    dataset = pd.read_excel("licoes_aprendidas.xlsx")
+    try:
+        dataset = pd.read_excel("licoes_aprendidas.xlsx")
+    except:
+        dataset = pd.read_excel("/Users/Teteu/Desktop/arvore-python/licoes_aprendidas.xlsx")
     
     dataset = dataset.dropna()
     dataset_list = eliminar_duplicado(dataset)
