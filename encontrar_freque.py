@@ -2,7 +2,7 @@ import pandas as pd
 from nltk.tokenize import word_tokenize
 
 
-stop_words ={'/',',','A','O','.','(',')','{','}','[',']','-','!','@','#','$','%','&','*',';',':','/','=','_','estiver', 'estivemos', 'houver', 'forem', 'tínhamos', 'fora', 'terei', 'teve', 'dele', 'houveram', 'éramos', 'foi', 'haver', 'essa', 'pelas', 'tivesse', 'tive', 'ou', 'tivera', 'as', 'qual', 'hão', 'tem', 'a', 'é', 'no', 'estejam', 'estivera', 'estivermos', 'minha', 'estivéssemos', 'houvéssemos', 'mas', 'mesmo', 'à', 'nas', 'são', 'aqueles', 'tua', 'estavam', 'somos', 'entre', 'houvemos', 'haja', 'não', 'estivéramos', 'aquele', 'houverei', 'nossas', 'uma', 'os', 'estive', 'nosso', 'terão', 'tivéssemos', 'houveriam', 'eram', 'seus', 'houvesse', 'quem', 'aos', 'estivesse', 'lhes', 'muito', 'ao', 'delas', 'esta', 'estejamos', 'depois', 'estas', 'fôramos', 'de', 'que', 'esteve', 'ela', 'mais', 'seríamos', 'lhe', 'terá', 'com', 'pelos', 'tivemos', 'nos', 'fomos', 'sou', 'temos', 'tivéramos', 'nossa', 'há', 'vocês', 'estão', 'me', 'tenho', 'estivessem', 'teu', 'era', 'eles', 'para', 'estiverem', 'você', 'houveríamos', 'fosse', 'seu', 'houverem', 'tiveram', 'esteja', 'sem', 'tenham', 'ser', 'tenha', 'do', 'nós', 'numa', 'tu', 'estamos', 'deles', 'sejamos', 'estava', 'isso', 'seremos', 'vos', 'num', 'houvessem', 'esses', 'até', 'houveria', 'houve', 'teremos', 'hajamos', 'essas', 'suas', 'tivermos', 'sua', 'ele', 'o', 'foram', 'tivessem', 'houvéramos', 'se', 'também', 'está', 'pelo', 'meus', 'estiveram', 'sejam', 'tiverem', 'como', 'dos', 'fossem', 'das', 'houvermos', 'elas', 'formos', 'já', 'hei', 'tinha', 'pela', 'isto', 'houverão', 'meu', 'estar', 'quando', 'nossos', 'teríamos', 'aquilo', 'eu', 'nem', 'na', 'teria', 'tiver', 'teus', 'aquela', 'houvera', 'for', 'serei', 'e', 'por', 'seja', 'só', 'fui', 'da', 'tinham', 'havemos', 'te', 'houveremos', 'estes', 'teriam', 'tuas', 'estou', 'será', 'fôssemos', 'hajam', 'um', 'serão', 'este', 'aquelas', 'houverá', 'tém', 'estávamos', 'em', 'dela', 'minhas', 'às', 'tenhamos', 'esse', 'seria', 'seriam'
+stop_words ={',','´-','A','O','.','(',')','{','}','[',']','-','!','@','#','$','%','&','*',';',':','/','=','_','estiver', 'estivemos', 'houver', 'forem', 'tínhamos', 'fora', 'terei', 'teve', 'dele', 'houveram', 'éramos', 'foi', 'haver', 'essa', 'pelas', 'tivesse', 'tive', 'ou', 'tivera', 'as', 'qual', 'hão', 'tem', 'a', 'é', 'no', 'estejam', 'estivera', 'estivermos', 'minha', 'estivéssemos', 'houvéssemos', 'mas', 'mesmo', 'à', 'nas', 'são', 'aqueles', 'tua', 'estavam', 'somos', 'entre', 'houvemos', 'haja', 'não', 'estivéramos', 'aquele', 'houverei', 'nossas', 'uma', 'os', 'estive', 'nosso', 'terão', 'tivéssemos', 'houveriam', 'eram', 'seus', 'houvesse', 'quem', 'aos', 'estivesse', 'lhes', 'muito', 'ao', 'delas', 'esta', 'estejamos', 'depois', 'estas', 'fôramos', 'de', 'que', 'esteve', 'ela', 'mais', 'seríamos', 'lhe', 'terá', 'com', 'pelos', 'tivemos', 'nos', 'fomos', 'sou', 'temos', 'tivéramos', 'nossa', 'há', 'vocês', 'estão', 'me', 'tenho', 'estivessem', 'teu', 'era', 'eles', 'para', 'estiverem', 'você', 'houveríamos', 'fosse', 'seu', 'houverem', 'tiveram', 'esteja', 'sem', 'tenham', 'ser', 'tenha', 'do', 'nós', 'numa', 'tu', 'estamos', 'deles', 'sejamos', 'estava', 'isso', 'seremos', 'vos', 'num', 'houvessem', 'esses', 'até', 'houveria', 'houve', 'teremos', 'hajamos', 'essas', 'suas', 'tivermos', 'sua', 'ele', 'o', 'foram', 'tivessem', 'houvéramos', 'se', 'também', 'está', 'pelo', 'meus', 'estiveram', 'sejam', 'tiverem', 'como', 'dos', 'fossem', 'das', 'houvermos', 'elas', 'formos', 'já', 'hei', 'tinha', 'pela', 'isto', 'houverão', 'meu', 'estar', 'quando', 'nossos', 'teríamos', 'aquilo', 'eu', 'nem', 'na', 'teria', 'tiver', 'teus', 'aquela', 'houvera', 'for', 'serei', 'e', 'por', 'seja', 'só', 'fui', 'da', 'tinham', 'havemos', 'te', 'houveremos', 'estes', 'teriam', 'tuas', 'estou', 'será', 'fôssemos', 'hajam', 'um', 'serão', 'este', 'aquelas', 'houverá', 'tém', 'estávamos', 'em', 'dela', 'minhas', 'às', 'tenhamos', 'esse', 'seria', 'seriam'
 }
 retirar=["/","\\","'"]
 
@@ -74,7 +74,10 @@ def main():
     global palavras_ja_consultadas
     global palavra_maior_frequencia
     global sentencas_com_palavra_mais_freq
-    dataset = pd.read_excel("licoes_aprendidas.xlsx")
+    try:
+        dataset = pd.read_excel("licoes_aprendidas.xlsx")
+    except:
+        dataset = pd.read_excel("/Users/Teteu/Desktop/arvore-python/licoes_aprendidas.xlsx")
     
     dataset = dataset.dropna()
     dataset_list = eliminar_duplicado(dataset)
@@ -86,7 +89,7 @@ def main():
         
     palavra_maior_frequencia=palavra_maior_freq()
     sentencas_com_palavra_mais_freq = sentecas_palavra_freq(palavra_maior_frequencia)
-    
+   
 
 
-    return sentencas_com_palavra_mais_freq
+    return dataset_list,sentencas_com_palavra_mais_freq
