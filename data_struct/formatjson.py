@@ -1,8 +1,9 @@
 import pandas as pd
 from nltk.tokenize import word_tokenize
 import json
-
 from encontrar_freque import main
+global dici_dados
+dici_dados = []
 
 def verificar_inicio(frase):
     aux=0
@@ -32,6 +33,7 @@ def add_ja_existente(endereco,palavra_anterior,palavra_adicionar):
         for i in endereco["proximo"]:
             if i["palavra"] == palavra_adicionar:
                 aux=1
+                break
         if (aux!=1):
             endereco["proximo"].append({"palavra":palavra_adicionar,"chance":"nada ainda %","proximo":[]})
             aux=0
@@ -47,7 +49,7 @@ def add_ja_existente(endereco,palavra_anterior,palavra_adicionar):
 def endereco_palavra_inicial(palavra):
     for pos,i in enumerate(dici_dados):
         if i["palavra"]==palavra:
-            return pos
+            return dici_dados[pos]
 
 #--------------------------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------------------------
@@ -57,23 +59,50 @@ def criar_json(frase):
         endereco = endereco_palavra_inicial(frase[0])
         for pos,palavra in enumerate(frase[1:]):
             if (palavra!=""):
-                add_ja_existente(dici_dados[endereco],frase[pos],palavra)      
+                add_ja_existente(endereco,frase[pos],palavra)      
     except:
         return 0
 
 #--------------------------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------------------------
 
-def main2(a,b):
-    global dici_dados
-    global dataset_list
-    global palavras_inicial_frequencia
-    dici_dados = []
-    dataset_list=a
-    palavras_inicial_frequencia = b
+def porcentagem(lista):
+    tamanho = len(lista)
+    if(tamanho != 0):
+        porcentagem = (1/tamanho)*100
+    else:
+        porcentagem = 0 
+    porcentagem=round(porcentagem, 2)
+    return porcentagem
+
+#--------------------------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------------------------
+
+def adicionar_porcetagem(listas):
+    for frase in listas:
+        frase["chance"] = porcentagem(listas)
+        adicionar_porcetagem(frase["proximo"])
+        
+    
+    return 0
+
+#--------------------------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------------------------
+
+def criarjson(dataset_list,palavras_inicial_frequencia):
     for palavra in palavras_inicial_frequencia:
         criar_novo_ramo(palavra)
     for frase in dataset_list:
         print(frase)
         criar_json(frase)
-    print(json.dumps(dici_dados, indent='\t'))
+
+    adicionar_porcetagem(dici_dados)
+
+    out_file = open("formatojson.json", "w")  
+    
+    json.dump(dici_dados, out_file, indent = 6)  
+    
+    out_file.close()  
+
+    return 0
+
